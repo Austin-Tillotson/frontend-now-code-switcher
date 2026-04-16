@@ -44,6 +44,17 @@ body {
     transition: all 0.2s linear;
 }
 
+@media (min-width: 500px) {
+    .header__inner {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+    }
+}
+
 .header__inner-left {
     display: flex;
     align-items: center;
@@ -60,7 +71,37 @@ body {
 .header__nav {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
+    padding-top: 1rem;
     gap: 1.5rem;
+}
+
+@media screen and (min-width: 420px) {
+    .header__nav {
+        flex-direction: row;
+        padding-top: 0;
+    }
+
+    .header__nav.active {
+        flex-direction: column;
+    }
+}
+
+@media screen and (min-width: 1050px) {
+    .header__nav {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        padding-top: 0;
+    }
+
+    .header__inner {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+    }
 }
 
 .header__nav.active {
@@ -117,17 +158,6 @@ body {
     font-size: 24px;
     margin-right: 20px;
     color: #fff;
-}
-
-@media (min-width: 500px) {
-    .header__inner {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px;
-    }
 }
 
 .container {
@@ -541,6 +571,8 @@ pre[class*="language-"].line-numbers > code {
     transform: translateY(0);
 }
 
+/* FALLING STARS  */
+
 @keyframes fall {
     0% {
         transform: translateY(-10vh);
@@ -552,5 +584,37 @@ pre[class*="language-"].line-numbers > code {
     100% {
         transform: translateY(110vh);
         opacity: 0;
+    }
+}
+
+.star {
+    position: fixed;
+    top: -10vh;
+    width: 1px;
+    height: 100px;
+    background: linear-gradient(to bottom, transparent, white, transparent);
+    opacity: 0;
+    animation: fall 3s linear infinite;
+}
+
+.star::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100px;
+    background: linear-gradient(to top, white, white, transparent);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    animation: twinkling 4.5s infinite;
+}
+
+@keyframes twinkling {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
     }
 }
